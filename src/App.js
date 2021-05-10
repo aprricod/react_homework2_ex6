@@ -3,21 +3,25 @@ import Info from "./components/info";
 import Form from "./components/form";
 import Weather from "./components/weather";
 
-const API_KEY = "7874d83f4d3c4013a0a71d97ff021cc2";
+const API_KEY = "ec508e7558ba821e57493464ce94b92d";
 
 class App extends React.Component {
-  gettingWeather = async () => {
+  gettingWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
     const api_url = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
     );
     const data = await api_url.json();
     console.log(data);
   };
+
   render() {
     return (
       <div>
         <Info />
-        <Form />
+        {/* weatherMethod - это свойство, которое сам создаю */}
+        <Form weatherMethod={this.gettingWeather} />
         <Weather />
       </div>
     );
