@@ -2,7 +2,20 @@ import React from "react";
 
 class Weather extends React.Component {
   render() {
-    return <div>Компонент с информацией о погоде</div>;
+    return (
+      <div>
+        {this.props.city && (
+          <div>
+            <p>
+              Местоположение: {this.props.city}, {this.props.country}
+            </p>
+            <p>Температура: {this.props.temp}</p>
+            <p>Давление: {this.props.pressure}</p>
+            <p>Закат солнца: {this.props.sunset}</p>
+          </div>
+        )}
+      </div>
+    );
   }
 }
 export default Weather;
